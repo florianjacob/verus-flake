@@ -1,15 +1,46 @@
 { lib
 , rustPlatform
+, fetchFromGitHub
 , makeBinaryWrapper
 , rust-bin
 , rustup
-, vargo
 , z3
 }:
 
+let
+  version = "0.2025.10.05.bf8e97e";
+  src = fetchFromGitHub {
+    owner = "verus-lang";
+    repo = "verus";
+    tag = "release/${version}";
+    hash = "sha256-66F1YBjqpNrQVqdOjJqYbUhSmJPOeup8DIbyPA+nkiE=";
+  };
+  vargo = rustPlatform.buildRustPackage (finalAttrs: {
+    pname = "vargo";
+    inherit version src;
+
+    sourceRoot = "source/tools/vargo";
+
+    cargoHash = "sha256-0WJEW3FtoWxMaedqBoCmaS0HLsLjxtBlBClAXcjf/6s=";
+
+    meta = meta // { mainProgram = "vargo"; };
+  });
+  meta = {
+    homepage = "https://github.com/verus-lang/verus";
+    description = "Verified Rust for low-level systems code";
+    license = lib.licenses.mit;
+    maintainers = with lib.maintainers; [ stephen-huan ];
+    platforms = [
+      "x86_64-linux"
+      "x86_64-darwin"
+      "aarch64-darwin"
+      "x86_64-windows"
+    ];
+  };
+in
 rustPlatform.buildRustPackage {
   pname = "verus";
-  inherit (vargo) version src;
+  inherit version src;
 
   sourceRoot = "source/source";
 
@@ -48,17 +79,7 @@ rustPlatform.buildRustPackage {
   # no tests, verified when built
   doCheck = false;
 
-  meta = {
-    homepage = "https://github.com/verus-lang/verus";
-    description = "Verified Rust for low-level systems code";
-    license = lib.licenses.mit;
-    maintainers = with lib.maintainers; [ stephen-huan ];
-    platforms = [
-      "x86_64-linux"
-      "x86_64-darwin"
-      "aarch64-darwin"
-      "x86_64-windows"
-    ];
-    mainProgram = "verus";
-  };
+  passthru = { inherit vargo; };
+
+  meta = meta // { mainProgram = "verus"; };
 }

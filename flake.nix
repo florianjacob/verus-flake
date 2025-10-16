@@ -36,9 +36,9 @@
         packages.${system} = rec {
           inherit rust-bin;
           rustup = pkgs.callPackage ./rustup.nix { inherit rust-bin; };
-          vargo = pkgs.callPackage ./vargo.nix { };
+          inherit (verus.passthru) vargo;
           verus = pkgs.callPackage ./verus.nix {
-            inherit rust-bin rustup vargo;
+            inherit rust-bin rustup;
             z3 = pkgs.z3.overrideAttrs (finalAttrs: previousAttrs: {
               # https://github.com/verus-lang/verus/blob/main/tools/common/consts.rs
               version = "4.12.5";
