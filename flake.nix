@@ -86,6 +86,7 @@
         }) {
           packages = with self.packages.${system}; [
             rust-bin
+            rustup
             vargo
             verus
           ];
