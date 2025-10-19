@@ -34,6 +34,7 @@
       in
       {
         packages.${system} = rec {
+          default = verus;
           inherit rust-bin;
           rustup = pkgs.callPackage ./rustup.nix { inherit rust-bin; };
           inherit (verus.passthru) vargo;
