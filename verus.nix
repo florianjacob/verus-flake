@@ -8,7 +8,7 @@
 }:
 
 let
-  version = "0.2025.10.05.bf8e97e";
+  version = "0.2025.11.04.289b755";
   src = fetchFromGitHub {
     owner = "verus-lang";
     repo = "verus";
