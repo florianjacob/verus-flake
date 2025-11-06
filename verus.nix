@@ -21,7 +21,7 @@ let
 
     sourceRoot = "source/tools/vargo";
 
-    cargoHash = "sha256-0WJEW3FtoWxMaedqBoCmaS0HLsLjxtBlBClBXcjf/6s=";
+    cargoHash = "sha256-0WJEW3FtoWxMaedqBoCmaS0HLsLjxtBlBClAXcjf/6s=";
 
     meta = meta // { mainProgram = "vargo"; };
   });
