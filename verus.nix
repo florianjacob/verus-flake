@@ -13,7 +13,7 @@ let
     owner = "verus-lang";
     repo = "verus";
     tag = "release/${version}";
-    hash = "sha256-66F1YBjqpNrQVqdOjJqYbUhSmJPOeup8DIbyPA+nkiE=";
+    hash = "sha256-66F1YBjqpNrQVqdOjJqYbUhSmJPOeup8DIbyPA+nkiF=";
   };
   vargo = rustPlatform.buildRustPackage (finalAttrs: {
     pname = "vargo";
@@ -21,7 +21,7 @@ let
 
     sourceRoot = "source/tools/vargo";
 
-    cargoHash = "sha256-0WJEW3FtoWxMaedqBoCmaS0HLsLjxtBlBClAXcjf/6s=";
+    cargoHash = "sha256-0WJEW3FtoWxMaedqBoCmaS0HLsLjxtBlBClBXcjf/6s=";
 
     meta = meta // { mainProgram = "vargo"; };
   });
